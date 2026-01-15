@@ -4,6 +4,7 @@ import "./App.css";
 interface Question {
   id: number;
   text: string;
+  reversed?: boolean;
 }
 
 interface Response {
@@ -11,12 +12,40 @@ interface Response {
   rating: number;
 }
 
+// MCF-9 questions
 const QUESTIONS: Question[] = [
-  { id: 1, text: "This quiz app is easy to use" },
-  { id: 2, text: "I would recommend this to others" },
-  { id: 3, text: "The interface is intuitive" },
-  { id: 4, text: "I found the rating scale helpful" },
-  { id: 5, text: "I would use this app again" },
+  {
+    id: 1,
+    text: "Learning a practical vocation is more beneficial to society than theoretical studies.",
+  },
+  { id: 2, text: "I trust science.", reversed: true },
+  { id: 3, text: "Children should be shaped by a firm hand." },
+  {
+    id: 4,
+    text: "When push comes to shove, those who are prepared will survive.",
+  },
+  {
+    id: 5,
+    text: "We need to prepare for a wave of break-ins, robberies and other crimes in the future.",
+  },
+  {
+    id: 6,
+    text: 'The discussions about sexual assault have led to a situation where even friendly gestures and complements are hyped up as "sexual assault".',
+  },
+  {
+    id: 7,
+    text: "Social support does more than harsh prison sentences.",
+    reversed: true,
+  },
+  {
+    id: 8,
+    text: "The democratic politicians of today are better than the dictators of the past.",
+    reversed: true,
+  },
+  {
+    id: 9,
+    text: "The conservative values and norms are still the best way to live.",
+  },
 ];
 
 function App() {
@@ -55,9 +84,16 @@ function App() {
     setQuizComplete(false);
   };
 
-  const getAverageRating = () => {
+  const getTotalScore = () => {
     if (responses.length === 0) return 0;
-    const sum = responses.reduce((acc, r) => acc + r.rating, 0);
+    const sum = responses.reduce((acc, response) => {
+      const question = QUESTIONS.find((q) => q.id === response.questionId);
+      let score = response.rating;
+      if (question?.reversed) {
+        score = 6 - response.rating; // Reverse: 5->1, 4->2, 3->3, 2->4, 1->5
+      }
+      return acc + score;
+    }, 0);
     return sum;
   };
 
@@ -68,7 +104,7 @@ function App() {
         <div className="results-card">
           <div className="average-rating">
             <span className="average-label">Total Score</span>
-            <span className="average-value">{getAverageRating()}</span>
+            <span className="average-value">{getTotalScore()}</span>
           </div>
 
           <button onClick={resetQuiz} className="nav-button reset-button">
