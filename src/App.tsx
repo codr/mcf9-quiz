@@ -22,9 +22,9 @@ const QUESTIONS: Question[] = [
 function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [responses, setResponses] = useState<Response[]>([]);
+  const [quizComplete, setQuizComplete] = useState(false);
 
   const currentQuestion = QUESTIONS[currentIndex];
-  const isAnswered = responses.some((r) => r.questionId === currentQuestion.id);
   const isLastQuestion = currentIndex === QUESTIONS.length - 1;
 
   const handleRating = (rating: number) => {
@@ -36,10 +36,7 @@ function App() {
 
     if (isLastQuestion) {
       // Quiz complete
-      setTimeout(
-        () => alert(`Quiz complete! Thank you for your responses.`),
-        100
-      );
+      setTimeout(() => setQuizComplete(true), 300);
     } else {
       // Move to next question
       setTimeout(() => setCurrentIndex((prev) => prev + 1), 300);
@@ -55,7 +52,32 @@ function App() {
   const resetQuiz = () => {
     setCurrentIndex(0);
     setResponses([]);
+    setQuizComplete(false);
   };
+
+  const getAverageRating = () => {
+    if (responses.length === 0) return 0;
+    const sum = responses.reduce((acc, r) => acc + r.rating, 0);
+    return sum;
+  };
+
+  if (quizComplete) {
+    return (
+      <div className="quiz-container">
+        <h1>Quiz Complete!</h1>
+        <div className="results-card">
+          <div className="average-rating">
+            <span className="average-label">Total Score</span>
+            <span className="average-value">{getAverageRating()}</span>
+          </div>
+
+          <button onClick={resetQuiz} className="nav-button reset-button">
+            Retake Quiz
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="quiz-container">
