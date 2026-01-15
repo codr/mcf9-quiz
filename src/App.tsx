@@ -60,17 +60,6 @@ function App() {
   return (
     <div className="quiz-container">
       <h1>Quiz</h1>
-      <div className="progress">
-        Question {currentIndex + 1} of {QUESTIONS.length}
-        <div className="progress-bar">
-          <div
-            className="progress-fill"
-            style={{
-              width: `${((currentIndex + 1) / QUESTIONS.length) * 100}%`,
-            }}
-          ></div>
-        </div>
-      </div>
 
       <div className="question-card">
         <h2>{currentQuestion.text}</h2>
@@ -94,6 +83,17 @@ function App() {
         <div className="scale-labels">
           <span>Strongly Disagree</span>
           <span>Strongly Agree</span>
+        </div>
+      </div>
+
+      <div className="progress">
+        <div className="progress-bar">
+          <div
+            className="progress-fill"
+            style={{
+              width: `${((currentIndex + 1) / QUESTIONS.length) * 100}%`,
+            }}
+          ></div>
         </div>
       </div>
 

@@ -38,7 +38,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #646cff, #61dafb);
+  background: #646cff;
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -106,10 +106,10 @@
 }
 
 .rating-button.selected {
-  background: linear-gradient(135deg, #646cff, #61dafb);
-  border-color: transparent;
+  background: #646cff;
+  border-color: #646cff;
   color: white;
-  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.3);
+  box-shadow: none;
 }
 
 .scale-labels {
