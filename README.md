@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# MCF9 Quiz App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple quiz application built with React, TypeScript, and Vite. Users can respond to survey questions on a 1-5 agreement scale and receive instant results.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interactive Quiz** - Present questions and collect 1-5 scale responses from users
+- **Reverse Scoring** - Support for negatively-phrased questions that score in reverse
+- **Dynamic Results** - Display total scores with performance brackets (Low, Moderate, High)
+- **Navigation** - Move between questions, review previous answers, or reset the quiz
+- **Responsive Design** - Clean, flat design that works across devices
+- **Fast Development** - Built with Vite for instant HMR and blazing fast builds
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Prerequisites
 
-## Expanding the ESLint configuration
+- Node.js (v18+)
+- npm or yarn
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Installation
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Install dependencies
+npm install
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Start development server
+npm run dev
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Build for production
+npm run build
+
+# Run linting
+npm run lint
+
+# Preview production build
+npm run preview
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The development server will start at `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Project Structure
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+src/
+  ├── App.tsx          # Main quiz component with logic
+  ├── App.css          # Styling for quiz interface
+  ├── main.tsx         # React entry point
+  ├── index.css        # Global styles
+  └── assets/          # Static assets
+```
+
+## Customizing Questions
+
+Edit the `QUESTIONS` array in [src/App.tsx](src/App.tsx) to modify quiz content:
+
+```tsx
+const QUESTIONS: Question[] = [
+  { id: 1, text: "Question text here" },
+  { id: 2, text: "Negatively phrased question", reversed: true },
+  // Add more questions...
+];
+```
+
+### Question Options
+
+- `id` - Unique identifier for the question
+- `text` - The question text displayed to users
+- `reversed` (optional) - Set to `true` for reverse scoring (5→1, 4→2, etc.)
+
+## Score Brackets
+
+Results are categorized based on performance:
+
+- **Low** - 0-40% of maximum score
+- **Moderate** - 40-70% of maximum score
+- **High** - 70%+ of maximum score
+
+Customize bracket thresholds and messages in the `getScoreBracket()` function in [src/App.tsx](src/App.tsx).
+
+## Technology Stack
+
+- **React** - UI framework
+- **TypeScript** - Type-safe JavaScript
+- **Vite** - Build tool and dev server
+- **ESLint** - Code quality
+
+## License
+
+MIT
