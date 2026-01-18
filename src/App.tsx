@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import "./App.css";
-import { QUESTIONS, getResultsMessage } from "./questions";
+import './App.css';
+import { QUESTIONS, getResultsMessage } from './questions';
 
 interface Response {
   questionId: number;
@@ -95,8 +95,8 @@ function App() {
               className={`rating-button ${
                 responses.find((r) => r.questionId === currentQuestion.id)
                   ?.rating === rating
-                  ? "selected"
-                  : ""
+                  ? 'selected'
+                  : ''
               }`}
               onClick={() => handleRating(rating)}
             >
