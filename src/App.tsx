@@ -61,7 +61,7 @@ function App() {
     const results = getResultsMessage(getTotalScore());
     return (
       <div className="quiz-container">
-        <h1>Quiz Complete!</h1>
+        <h1>MCF-9 Complete!</h1>
         <div className="results-card">
           <div className="average-rating">
             <span className="average-label">Total Score</span>
@@ -83,7 +83,7 @@ function App() {
 
   return (
     <div className="quiz-container">
-      <h1>Quiz</h1>
+      <h1>MCF-9</h1>
 
       <div className="question-card">
         <h2>{currentQuestion.text}</h2>
