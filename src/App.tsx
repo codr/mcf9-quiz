@@ -97,7 +97,37 @@ function App() {
     return sum;
   };
 
+  const getScoreBracket = () => {
+    const score = getTotalScore();
+    const threshold1 = 22;
+    const threshold2 = 31;
+
+    if (score <= threshold1) {
+      return {
+        category: "Low",
+        color: "low",
+        message:
+          "You likely prioritize individual autonomy, nuance, and skepticism towards traditional authority.",
+      };
+    } else if (score <= threshold2) {
+      return {
+        category: "Moderate",
+        color: "moderate",
+        message:
+          'You value a balance between social order and personal freedom, though you might lean towards "safety" when things feel chaotic.',
+      };
+    } else {
+      return {
+        category: "High",
+        color: "high",
+        message:
+          'This indicates a high "Authoritarian Personality" profile. You likely have a strong preference for clear hierarchies, traditional moral codes, and decisive leadership to maintain social stability.',
+      };
+    }
+  };
+
   if (quizComplete) {
+    const bracket = getScoreBracket();
     return (
       <div className="quiz-container">
         <h1>Quiz Complete!</h1>
@@ -105,6 +135,11 @@ function App() {
           <div className="average-rating">
             <span className="average-label">Total Score</span>
             <span className="average-value">{getTotalScore()}</span>
+          </div>
+
+          <div className={`score-bracket`}>
+            <span className="bracket-label">{bracket.category}</span>
+            <p className="bracket-message">{bracket.message}</p>
           </div>
 
           <button onClick={resetQuiz} className="nav-button reset-button">

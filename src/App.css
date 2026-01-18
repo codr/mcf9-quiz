@@ -198,3 +198,38 @@
   font-weight: 700;
   color: #646cff;
 }
+
+.score-bracket {
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.bracket-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.bracket-message {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+.bracket-low {
+  background: white;
+}
+
+.bracket-moderate {
+  background: white;
+}
+
+.bracket-high {
+  background: white;
+}
